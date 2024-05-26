@@ -18,9 +18,9 @@ export default function Home() {
             Seeking Investors
         </button>
     </div>
-    <br/>
-    <Slider/>
-    <br/>
+    <div className="swiper-content">
+        <Slider/>
+    </div>
     </div>
     </>
     );
