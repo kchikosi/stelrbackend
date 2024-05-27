@@ -11,12 +11,17 @@ import Legal from './routes/bottom-nav/legal.tsx'
 import Help from './routes/bottom-nav/help.tsx'
 import Accessibility from './routes/bottom-nav/accessibility.tsx'
 import './index.css'
+
+
 import {
   createRoutesFromElements,
   createBrowserRouter,
   Route,
   RouterProvider
 } from "react-router-dom";
+
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter ([
     {
