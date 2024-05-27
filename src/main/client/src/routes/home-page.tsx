@@ -1,4 +1,3 @@
-import Slider from './slider/slider.tsx'
 
 export default function Home() {
     return (
@@ -8,7 +7,7 @@ export default function Home() {
         <b> Global Lending and Payments Simplified </b>
     </p>
     <p>
-        Connecting budding entrepreneurs with potential investors seemlessly. Discover, connect and fuel innovation with ease, all in one platform.
+        Connecting budding entrepreneurs with potential investors seamlessly. Discover, connect and fuel innovation with ease, all in one platform.
     </p>
     <div>
         <button>
@@ -17,9 +16,6 @@ export default function Home() {
         <button>
             Seeking Investors
         </button>
-    </div>
-    <div className="swiper-content">
-        <Slider/>
     </div>
     </div>
     </>

@@ -8,7 +8,7 @@ function App() {
   return (
     <>
         <div id="top-nav">
-          <a class="active" href="#home">Home</a>
+          <a className="active" href="#home">Home</a>
           <a href="#personal">Personal</a>
           <a href="#business">Business</a>
           <a href="#enterprise">Enterprise</a>
