@@ -16,18 +16,18 @@ return (
                 <Nav className="me-auto">
                     <Nav.Link href="/home">Home</Nav.Link>
                     <Nav.Link href="/personal">Personal</Nav.Link>
-                    <Nav.Link href="/security">Business</Nav.Link>
+                    <Nav.Link href="/business">Business</Nav.Link>
                     <Nav.Link href="/enterprise">Enterprise</Nav.Link>
                     <NavDropdown title="More" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">About Us</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.1">Contact Us</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.1">FAQ</NavDropdown.Item>
+                        <NavDropdown.Item href="/about">About Us</NavDropdown.Item>
+                        <NavDropdown.Item href="/contact">Contact Us</NavDropdown.Item>
+                        <NavDropdown.Item href="/faq">FAQ</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
            </Navbar.Collapse>
           <ButtonGroup aria-label="Basic example">
-            <Button variant="secondary">Sign up</Button>
-            <Button variant="secondary">Login</Button>
+              <Button variant="secondary" href="/signup">Sign up</Button>
+              <Button href="/login">Login</Button>
           </ButtonGroup>
         </Container>
       </Navbar>

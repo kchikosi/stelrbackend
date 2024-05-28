@@ -10,6 +10,11 @@ import Security from './routes/bottom-nav/security.tsx'
 import Legal from './routes/bottom-nav/legal.tsx'
 import Help from './routes/bottom-nav/help.tsx'
 import Accessibility from './routes/bottom-nav/accessibility.tsx'
+import Login from './routes/login/login.tsx'
+import Signup from './routes/login/signup.tsx'
+import Contact from './routes/contact-us.tsx'
+import FAQ from './routes/faq.tsx'
+
 import './index.css'
 
 
@@ -67,6 +72,22 @@ const router = createBrowserRouter ([
     {
         path: "/accessibility",
         element: <Accessibility />,
+    },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/signup",
+        element: <Signup />,
+    },
+    {
+        path: "/contact",
+        element: <Contact />,
+    },
+    {
+        path: "/faq",
+        element: <FAQ />,
     },
 ]);
 
