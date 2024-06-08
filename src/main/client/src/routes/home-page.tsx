@@ -11,7 +11,7 @@ export default function Home() {
         <Row>
             <Col>
                 <Card className="text-center border-0" style={{ height: '30rem' }}>
-                  <Card.Header>Global Lending and Payments Simplified</Card.Header>
+                  <Card.Header className="border-0">Global Lending and Payments Simplified</Card.Header>
                   <Card.Body>
                     <Card.Text>
                         Connecting budding entrepreneurs with potential investors seamlessly. Discover, connect and fuel innovation with ease, all in one platform.
@@ -32,7 +32,7 @@ export default function Home() {
         <Row>
             <Col>
                 <Card className="text-center border-0">
-                  <Card.Header>Bridging gaps</Card.Header>
+                  <Card.Header  className="border-0">Bridging gaps</Card.Header>
                   <Card.Body>
                     <blockquote className="blockquote mb-0">
                       <p>
@@ -51,7 +51,7 @@ export default function Home() {
         <Row>
             <Col>
                 <Card className="text-center border-0">
-                  <Card.Header>More to come</Card.Header>
+                  <Card.Header  className="border-0">More to come</Card.Header>
                   <Card.Body>
                     <blockquote className="blockquote mb-0">
                       <p>
@@ -71,8 +71,8 @@ export default function Home() {
             <Col>
                 <Card className="text-center border-0">
                     <Card.Body>
-                    <Button variant="primary">Global Payment Processing</Button>{'   '}
-                    <Button variant="primary">Personal Services</Button>{'   '}
+                    <Button variant="primary">Global Payment Processing</Button>{' '}
+                    <Button variant="primary">Personal Services</Button>{' '}
                     <Button variant="primary">Subscription Services</Button>
                     </Card.Body>
                 </Card>
