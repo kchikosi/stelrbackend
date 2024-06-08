@@ -21,7 +21,9 @@ button {
   font-weight: 400;
 }
 
-#root, #personal, #business, #enterprise, #about {
+#root, #personal, #business, #enterprise, #about,
+#contact, #faq, #privacy, #security, #legal, #help,
+#accessibility {
   height: 90%;
   width: 100%;
 }

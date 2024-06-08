@@ -7,7 +7,9 @@ export default function Root() {
   return (
     <>
     <TopNav/>
-    <Home/>
+    <div id="root">
+        <Home/>
+    </div>
     <BottomNav/>
     </>
   )
