@@ -1,4 +1,5 @@
 package com.stelr.stelrbackend.domain;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.sql.Date;
+import java.sql.Timestamp;
 
 
 @Data
@@ -20,5 +24,13 @@ public class Account {
     private long accountId;
 
     private long personId, accountTypeId;
-    private String accountType;
+
+    private Timestamp dateCreated, dateModified;
+
+    public Account(long personId, long accountTypeId, Timestamp dateCreated, Timestamp dateModified) {
+        this.personId = personId;
+        this.accountTypeId = accountTypeId;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
+    }
 }
