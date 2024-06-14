@@ -18,15 +18,15 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long personId;
-    private String firstName, lastName, initial, email, phone, password;
+    public String firstName, lastName, initial, email, phone, password;
 
-    private Timestamp dateCreated;
+    public Timestamp dateCreated;
 
-    private Timestamp dateModified;
+    public Timestamp dateModified;
 
     @OneToOne
     @JoinColumn(name = "accountId")
-    private Account account;
+    public Account account;
 
     public Person(String firstName, String lastName, String initial, String email, String phone, String password, Timestamp dateCreated, Timestamp dateModified) {
         this.firstName = firstName;
