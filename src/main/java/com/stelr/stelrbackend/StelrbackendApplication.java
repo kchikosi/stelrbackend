@@ -29,12 +29,18 @@ public class StelrbackendApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Person person = new Person("Kotsanai", "Chikosi", "R", "thegoat@gmail.com", "630 888 7754", "test", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
-        personRepository.save(person);
         AccountType accountType = new AccountType("Investor", "Investor account", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
         accountTypeRepository.save(accountType);
-        Account account = new Account(1,1, Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+
+        Account account = new Account(Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+        account.setAccountType(accountType);
         accountRepository.save(account);
+
+        Person person = new Person("Kotsanai", "Chikosi", "R", "thegoat@gmail.com", "603 256 9898", "passwd", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+
+        person.setAccount(account);
+        personRepository.save(person);
+
 
     }
 }

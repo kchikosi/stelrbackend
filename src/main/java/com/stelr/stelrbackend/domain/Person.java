@@ -1,9 +1,7 @@
 package com.stelr.stelrbackend.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,12 +18,16 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long personId;
-    private long accountId;
     private String firstName, lastName, initial, email, phone, password;
 
     private Timestamp dateCreated;
 
     private Timestamp dateModified;
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accountId")
+    private Account account;
 
     public Person(String firstName, String lastName, String initial, String email, String phone, String password, Timestamp dateCreated, Timestamp dateModified) {
         this.firstName = firstName;
@@ -36,5 +38,13 @@ public class Person {
         this.password = password;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

@@ -1,15 +1,12 @@
 package com.stelr.stelrbackend.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 
@@ -22,15 +19,24 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long accountId;
+    private Timestamp dateCreated;
+    private Timestamp dateModified;
 
-    private long personId, accountTypeId;
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "accountTypeId")
+    private AccountType accountType;
 
-    private Timestamp dateCreated, dateModified;
-
-    public Account(long personId, long accountTypeId, Timestamp dateCreated, Timestamp dateModified) {
-        this.personId = personId;
-        this.accountTypeId = accountTypeId;
+    public Account(Timestamp dateCreated, Timestamp dateModified) {
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 }

@@ -1,9 +1,6 @@
 package com.stelr.stelrbackend.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +21,10 @@ public class AccountType {
 
     private String accountType, description;
     private Timestamp dateCreated, dateModified;
+
+    @OneToOne
+    @JoinColumn(name = "accountTypeId")
+    private Account account;
 
     public AccountType(String accountType, String description, Timestamp dateCreated, Timestamp dateModified) {
         this.accountType = accountType;
