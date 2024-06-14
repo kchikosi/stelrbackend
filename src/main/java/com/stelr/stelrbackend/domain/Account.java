@@ -23,7 +23,7 @@ public class Account {
     private Timestamp dateModified;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "accountTypeId")
     private AccountType accountType;
 

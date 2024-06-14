@@ -24,8 +24,7 @@ public class Person {
 
     private Timestamp dateModified;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "accountId")
     private Account account;
 
