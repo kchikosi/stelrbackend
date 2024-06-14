@@ -1,6 +1,5 @@
 package com.stelr.stelrbackend.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,18 +14,14 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Entity
 public class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long personId;
     public String firstName, lastName, initial, email, phone, password;
-
-    public Timestamp dateCreated;
-
-    public Timestamp dateModified;
-
+    public Timestamp dateCreated, dateModified;
     @OneToOne
     @JoinColumn(name = "accountId")
     public Account account;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public long personId;
 
     public Person(String firstName, String lastName, String initial, String email, String phone, String password, Timestamp dateCreated, Timestamp dateModified) {
         this.firstName = firstName;

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -15,13 +16,11 @@ import java.sql.Timestamp;
 
 public class AccountType {
 
+    public String accountType, description;
+    public Timestamp dateCreated, dateModified;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long accountTypeId;
-
-    private String accountType, description;
-    private Timestamp dateCreated, dateModified;
-
     @OneToOne
     @JoinColumn(name = "accountTypeId")
     private Account account;

@@ -16,16 +16,15 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Entity
 public class Account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long accountId;
-    private Timestamp dateCreated;
-    private Timestamp dateModified;
-
+    public Timestamp dateModified;
+    public Timestamp dateCreated;
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "accountTypeId")
-    private AccountType accountType;
+    public AccountType accountType;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public long accountId;
 
     public Account(Timestamp dateCreated, Timestamp dateModified) {
         this.dateCreated = dateCreated;

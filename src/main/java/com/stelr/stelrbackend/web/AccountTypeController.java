@@ -15,4 +15,6 @@ public class AccountTypeController {
     public Iterable<AccountType> getAccountTypes() {
         return repository.findAll();
     }
+
+
 }
