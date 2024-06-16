@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -29,10 +31,11 @@ public class PersonController {
         return new ResponseEntity<>(repository.save(person), null, HttpStatus.CREATED);
     }
 
-   @PutMapping("/persons/{id}")
+    @PutMapping("/persons/{id}")
     public ResponseEntity update(@PathVariable("id") long id, @RequestBody Person person) {
-        Optional<Person> fromDb = Optional.ofNullable(repository.findById(id).orElseThrow(() -> new PersonNotFoundException(id)));
-        repository.updateByPersonId(fromDb.get().account, person.dateModified, person.email, person.firstName, person.initial, person.lastName, person.password, person.phone, fromDb.get().personId);
+        Optional<Person> personFromDb = Optional.ofNullable(repository.findById(id).orElseThrow(() -> new PersonNotFoundException(id)));
+        Timestamp dateModified = Timestamp.valueOf(LocalDateTime.now());
+        repository.updateByPersonId(personFromDb.get().account, dateModified, person.email, person.firstName, person.initial, person.lastName, person.password, person.phone, personFromDb.get().personId);
         return new ResponseEntity(HttpStatus.OK);
     }
 }
