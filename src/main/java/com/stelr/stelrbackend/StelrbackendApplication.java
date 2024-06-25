@@ -22,6 +22,9 @@ public class StelrbackendApplication implements CommandLineRunner {
     @Autowired
     private AccountTypeRepository accountTypeRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(StelrbackendApplication.class, args);
         logger.info("Application started");
@@ -41,6 +44,7 @@ public class StelrbackendApplication implements CommandLineRunner {
         person.setAccount(account);
         personRepository.save(person);
 
-
+        LoginUser loginUser = new LoginUser("test", "password", "USER", "thegoat@gmail.com", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+        userRepository.save(loginUser);
     }
 }
