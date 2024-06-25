@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/login")
+@RequestMapping(value = "/api/v1/auth/")
 public class LoginController {
 
     public static final String BEARER_PREFIX = "Bearer ";
@@ -23,7 +23,7 @@ public class LoginController {
     public ResponseEntity<JwtAuthenticationResponse> signin(@RequestBody SignIn request) throws Exception {
         JwtAuthenticationResponse response = authenticationService.signin(request);
         return ResponseEntity.ok()
-                .header(HttpHeaders.AUTHORIZATION, BEARER_PREFIX + response.getToken())
+                .header(HttpHeaders.AUTHORIZATION, BEARER_PREFIX + response.token)
                 .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization")
                 .build();
     }

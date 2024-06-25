@@ -1,5 +1,7 @@
 package com.stelr.stelrbackend;
 
+import com.stelr.stelrbackend.config.AuthenticationEntryPointImpl;
+import com.stelr.stelrbackend.config.JwtAuthenticationFilter;
 import com.stelr.stelrbackend.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
