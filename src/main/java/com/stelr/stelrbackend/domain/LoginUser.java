@@ -5,10 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
 @Data
@@ -24,7 +27,7 @@ public class LoginUser implements UserDetails {
     public String username;
     @Column(nullable = false)
     public String password;
-    public String role;
+
     @Column(nullable = false, updatable = false)
     public String email;
     @Column
@@ -38,23 +41,26 @@ public class LoginUser implements UserDetails {
     @Column
     public Timestamp dateCreate, dateModified;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    public List<String> roles;
+
     public LoginUser() {
     }
 
 
-    public LoginUser(String username, String password, String role, String email, Timestamp dateCreate, Timestamp dateModified) {
+    public LoginUser(String username, String password, List<String> roles, String email, Timestamp dateCreate, Timestamp dateModified) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
         this.email = email;
         this.dateCreate = dateCreate;
         this.dateModified = dateModified;
     }
 
-    public LoginUser(String username, String password, String role, String email, String address, String city, String state, String zip, Timestamp dateCreate, Timestamp dateModified) {
+    public LoginUser(String username, String password, List<String> roles, String email, String address, String city, String state, String zip, Timestamp dateCreate, Timestamp dateModified) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
         this.email = email;
         this.address = address;
         this.city = city;
@@ -66,7 +72,7 @@ public class LoginUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override

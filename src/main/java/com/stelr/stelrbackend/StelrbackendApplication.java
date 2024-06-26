@@ -1,6 +1,7 @@
 package com.stelr.stelrbackend;
 
 import com.stelr.stelrbackend.domain.*;
+import com.stelr.stelrbackend.service.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +11,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @SpringBootApplication
 public class StelrbackendApplication implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(StelrbackendApplication.class);
-
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
     @Autowired
     private PersonRepository personRepository;
     @Autowired
     private AccountRepository accountRepository;
     @Autowired
     private AccountTypeRepository accountTypeRepository;
-
     @Autowired
     private UserRepository userRepository;
 
@@ -44,7 +46,7 @@ public class StelrbackendApplication implements CommandLineRunner {
         person.setAccount(account);
         personRepository.save(person);
 
-        LoginUser loginUser = new LoginUser("test", "password", "USER", "thegoat@gmail.com", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
-        userRepository.save(loginUser);
+        LoginUser loginUser = new LoginUser("test", "password", List.of("USER"), "thegoat@gmail.com", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+        userDetailsService.encryptAndSavePassword(loginUser);
     }
 }
