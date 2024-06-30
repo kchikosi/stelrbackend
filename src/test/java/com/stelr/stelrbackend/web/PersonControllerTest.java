@@ -30,7 +30,7 @@ class PersonControllerTest {
 
     @Test
     public void getUser() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(get("/persons"))
+        MvcResult mvcResult = mockMvc.perform(get("/api/v1/persons"))
                 .andExpect(status().isOk())
                 .andReturn();
         String content = mvcResult.getResponse().getContentAsString();

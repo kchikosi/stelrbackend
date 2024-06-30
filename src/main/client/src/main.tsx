@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import ReactDOM, { createRoot } from 'react-dom/client'
 import Personal from './routes/top-nav/personal.tsx'
 import Business from './routes/top-nav/business.tsx'
 import Enterprise from './routes/top-nav/enterprise.tsx'
@@ -22,77 +22,37 @@ import {
   createRoutesFromElements,
   createBrowserRouter,
   Route,
-  RouterProvider
+  RouterProvider,
+  BrowserRouter,
+  Routes
 } from "react-router-dom";
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Home from './routes/home-page.tsx'
 
-const router = createBrowserRouter ([
-    {
-        path: "/",
-        element: <Root />,
-    },
-    {
-        path: "/home",
-        element: <Root />,
-    },
-    {
-        path: "/personal",
-        element: <Personal />,
-    },
-    {
-        path: "/business",
-        element: <Business />,
-    },
-    {
-        path: "/enterprise",
-        element: <Enterprise />,
-    },
-    {
-        path: "/about",
-        element: <About />,
-    },
-    {
-        path: "/privacy",
-        element: <Privacy />,
-    },
-    {
-        path: "/security",
-        element: <Security />,
-    },
-    {
-        path: "/legal",
-        element: <Legal />,
-    },
-    {
-        path: "/help",
-        element: <Help />,
-    },
-    {
-        path: "/accessibility",
-        element: <Accessibility />,
-    },
-    {
-        path: "/login",
-        element: <Login />,
-    },
-    {
-        path: "/signup",
-        element: <Signup />,
-    },
-    {
-        path: "/contact",
-        element: <Contact />,
-    },
-    {
-        path: "/faq",
-        element: <FAQ />,
-    },
-]);
+const root = createRoot(document.getElementById('root')!);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
+root.render(
+    <BrowserRouter>
+    <Routes>
+        <Route path='/' element={<Root/>} />
+        <Route path='home' element={<Home/>} />
+        <Route path='personal' element={<Personal/>} />
+        <Route path='business' element={<Business/>} />
+        <Route path='enterprise' element={<Enterprise/>} />
+        <Route path='about' element={<About/>} />
+        <Route path='privacy' element={<Privacy/>} />
+        <Route path='security' element={<Security/>} />
+        <Route path='legal' element={<Legal/>} />
+        <Route path='help' element={<Help/>} />
+        <Route path='accessibility' element={<Accessibility/>} />
+        <Route path='login' element={<Login/>} />
+        <Route path='signup' element={<Signup/>} />
+        <Route path='contact' element={<Contact/>} />
+        <Route path='faq' element={<FAQ/>} />
+    </Routes>
+    </BrowserRouter>
 )
+
+

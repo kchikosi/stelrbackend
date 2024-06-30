@@ -12,6 +12,6 @@ export default function Root() {
     </div>
     <BottomNav/>
     </>
-  )
-};
+  );
+}
 

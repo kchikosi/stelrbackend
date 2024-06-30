@@ -4,9 +4,12 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
+import TopNav from './top-nav/top-nav';
+import BottomNav from './bottom-nav/bottom-nav';
 export default function Home() {
     return (
     <>
+    <TopNav/>
     <Container>
         <Row>
             <Col>
@@ -79,6 +82,7 @@ export default function Home() {
             </Col>
         </Row>
     </Container>
+    <BottomNav/>
     </>
     );
 }

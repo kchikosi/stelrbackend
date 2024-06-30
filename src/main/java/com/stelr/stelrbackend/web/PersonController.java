@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(value = "/api/v1/")
 public class PersonController {
     @Autowired
     private PersonRepository repository;
@@ -28,6 +29,16 @@ public class PersonController {
 
     @PostMapping("/persons")
     public ResponseEntity save(@RequestBody Person person) {
+        Optional<Person> p = repository.findByEmail(person.email);
+        if (p.isPresent()) {
+            return new ResponseEntity<>("Account already exists", HttpStatus.OK);
+        }
+        if (person.dateModified == null) {
+            person.dateModified = Timestamp.valueOf(LocalDateTime.now());
+        }
+        if (person.dateCreated == null) {
+            person.dateCreated = Timestamp.valueOf(LocalDateTime.now());
+        }
         return new ResponseEntity<>(repository.save(person), null, HttpStatus.CREATED);
     }
 
