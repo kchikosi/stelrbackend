@@ -11,17 +11,21 @@ interface LoginUser {
   password: string;
 }
 
+interface Auth {
+  isAuthenticated: boolean;
+}
+
 export default function Login() {
   let [searchParams, setSearchParams] = useSearchParams();
-  let [isAuthenticated, setAuth] = React.useState(false);
-  let [loginUser, setLoginUser] = React.useState<LoginUser>();
-  
+  let [isAuthenticated, setAuth] = React.useState<Auth>();
+  const [loginUser, setLoginUser] = React.useState<LoginUser>();
+
 
   function handleChange() {
     //console.log("handle change..")
-    let loginUser : LoginUser = {
-      username: document.querySelector("#formBasicEmail").value,
-      password: document.querySelector("#formBasicPassword").value,
+    const loginUser: LoginUser = {
+      username: document.querySelector("#formBasicEmail")?.value,
+      password: document.querySelector("#formBasicPassword")?.value,
     };
     //console.log(loginUser.username);
     //console.log(loginUser.password);
@@ -29,12 +33,20 @@ export default function Login() {
   }
 
   let login = () => {
-    fetch('http://localhost:8080/api/v1/signin', {
+    fetch('http://localhost:8080/api/v1/auth/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(loginUser)
     })
-      .then(response => setAuth(true))
+      .then(response => (auth: Auth) => {
+        const jwtToken = response.headers.get('Authorization');
+        console.log(jwtToken);
+        if (jwtToken != null) {
+          sessionStorage.setItem("jwt" , jwtToken);
+          auth.isAuthenticated = true;
+          setAuth(auth);
+        }
+      })
       .catch(err => console.log(err))
   };
 
@@ -42,6 +54,7 @@ export default function Login() {
     event.preventDefault();
     console.log(loginUser?.username);
     console.log(loginUser?.password);
+    login();
   }
 
   return (
