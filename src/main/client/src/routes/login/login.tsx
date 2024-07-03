@@ -40,9 +40,9 @@ export default function Login() {
     })
       .then(response => (auth: Auth) => {
         const jwtToken = response.headers.get('Authorization');
-        console.log(jwtToken);
+        console.log("JWT token => " + jwtToken);
         if (jwtToken != null) {
-          sessionStorage.setItem("jwt" , jwtToken);
+          sessionStorage.setItem("jwt", jwtToken);
           auth.isAuthenticated = true;
           setAuth(auth);
         }
@@ -70,7 +70,7 @@ export default function Login() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword" onChange={handleChange}>
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" placeholder="Password" autoComplete="on"/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Sign up for email notifications" />
