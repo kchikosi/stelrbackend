@@ -6,10 +6,12 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import TopNav from '../top-nav/top-nav.tsx'
 import BottomNav  from '../bottom-nav/bottom-nav.tsx'
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
 
   const [validated, setValidated] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -95,7 +97,7 @@ return(
         />
       </Form.Group>
       <Button type="submit">Submit form</Button>
-      <Button type="button">Cancel</Button>
+      <Button type="button" onClick={() => {navigate(-1)}}>Cancel</Button>
     </Form>
 
     <BottomNav/>
