@@ -36,6 +36,7 @@ return (
           <ButtonGroup aria-label="Basic example">
               <Button variant="secondary" href="/signup">Sign up</Button>
               <Button href="/login">Login</Button>
+              <Button href="/logout">Log Out</Button>
           </ButtonGroup>
         </Container>
       </Navbar>

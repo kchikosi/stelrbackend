@@ -1,5 +1,4 @@
-import React from 'react'
-import ReactDOM, { createRoot } from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import Personal from './routes/top-nav/personal.tsx'
 import Business from './routes/top-nav/business.tsx'
 import Enterprise from './routes/top-nav/enterprise.tsx'
@@ -11,6 +10,7 @@ import Legal from './routes/bottom-nav/legal.tsx'
 import Help from './routes/bottom-nav/help.tsx'
 import Accessibility from './routes/bottom-nav/accessibility.tsx'
 import Login from './routes/login/login.tsx'
+import Logout from './routes/login/logout.tsx'
 import Signup from './routes/login/signup.tsx'
 import Contact from './routes/contact-us.tsx'
 import FAQ from './routes/faq.tsx'
@@ -19,10 +19,7 @@ import './index.css'
 
 
 import {
-  createRoutesFromElements,
-  createBrowserRouter,
   Route,
-  RouterProvider,
   BrowserRouter,
   Routes
 } from "react-router-dom";
@@ -48,6 +45,7 @@ root.render(
         <Route path='help' element={<Help/>} />
         <Route path='accessibility' element={<Accessibility/>} />
         <Route path='login' element={<Login/>} />
+        <Route path='logout' element={<Logout/>} />
         <Route path='signup' element={<Signup/>} />
         <Route path='contact' element={<Contact/>} />
         <Route path='faq' element={<FAQ/>} />
