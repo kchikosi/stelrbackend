@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import TopNav from '../top-nav/top-nav.tsx'
 import BottomNav from '../bottom-nav/bottom-nav.tsx'
 import { useNavigate } from "react-router-dom";
+import { AuthProvider } from "../auth.tsx";
 
 interface Auth {
   isAuthenticated: boolean;

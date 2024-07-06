@@ -14,43 +14,39 @@ import Logout from './routes/login/logout.tsx'
 import Signup from './routes/login/signup.tsx'
 import Contact from './routes/contact-us.tsx'
 import FAQ from './routes/faq.tsx'
-
 import './index.css'
-
-
 import {
   Route,
   BrowserRouter,
   Routes
-} from "react-router-dom";
-
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+} from "react-router-dom"
+import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './routes/home-page.tsx'
+import { AuthProvider, RequireAuth } from './routes/auth.tsx'
 
 const root = createRoot(document.getElementById('root')!);
 
 root.render(
-    <BrowserRouter>
-    <Routes>
-        <Route path='/' element={<Root/>} />
-        <Route path='home' element={<Home/>} />
-        <Route path='personal' element={<Personal/>} />
-        <Route path='business' element={<Business/>} />
-        <Route path='enterprise' element={<Enterprise/>} />
-        <Route path='about' element={<About/>} />
-        <Route path='privacy' element={<Privacy/>} />
-        <Route path='security' element={<Security/>} />
-        <Route path='legal' element={<Legal/>} />
-        <Route path='help' element={<Help/>} />
-        <Route path='accessibility' element={<Accessibility/>} />
-        <Route path='login' element={<Login/>} />
-        <Route path='logout' element={<Logout/>} />
-        <Route path='signup' element={<Signup/>} />
-        <Route path='contact' element={<Contact/>} />
-        <Route path='faq' element={<FAQ/>} />
-    </Routes>
-    </BrowserRouter>
+  <BrowserRouter>
+    <AuthProvider>
+      <Routes>
+        <Route path='/' element={<Root />} />
+        <Route path='home' element={<Home />} />
+        <Route path='personal' element={<RequireAuth><Personal /></RequireAuth>} />
+        <Route path='business' element={<Business />} />
+        <Route path='enterprise' element={<Enterprise />} />
+        <Route path='about' element={<About />} />
+        <Route path='privacy' element={<Privacy />} />
+        <Route path='security' element={<Security />} />
+        <Route path='legal' element={<Legal />} />
+        <Route path='help' element={<Help />} />
+        <Route path='accessibility' element={<Accessibility />} />
+        <Route path='login' element={<Login />} />
+        <Route path='logout' element={<Logout />} />
+        <Route path='signup' element={<Signup />} />
+        <Route path='contact' element={<Contact />} />
+        <Route path='faq' element={<FAQ />} />
+      </Routes>
+    </AuthProvider>
+  </BrowserRouter>
 )
-
-
