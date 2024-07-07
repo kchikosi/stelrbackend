@@ -4,35 +4,43 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
     user: any;
-    signin: (user: string, callback: VoidFunction) => void;
+    signin: (user: LoginUser, callback: VoidFunction) => void;
     signout: (callback: VoidFunction) => void;
 }
 
 interface LoginUser {
     username: string;
-    pasword: string;
+    password: string;
     isAuthenticated: boolean;
 }
 
 const AuthContext = React.createContext<AuthContextType>(null!);
 
-function useAuth() {
+export function useAuth() {
     return React.useContext(AuthContext);
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     let [user, setUser] = React.useState<LogiUser>({
         username: '',
-        pasword: '',
+        password: '',
         isAuthenticated: false,
     });
 
     let signin = (user: LoginUser, callback: VoidFunction) => {
-        return (() => {
-            user.isAuthenticated = true;
-            setUser(user);
-            setTimeout(callback, 100); //delay
-        });
+         console.log("auth()   >> fetch");
+        // console.log("user     >> " + user.username);
+        // console.log("password >> " + user.password);
+        // console.log("is auth? >> " + user.isAuthenticated);
+        fetch('http://localhost:8080/api/v1/auth/signin',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)                
+            }
+        ).then(response => {
+            console.log(response.status);
+        }).catch( err => console.log(err));
     };
 
     let signout = (callback: VoidFunction) => {
@@ -63,10 +71,10 @@ export function AuthStatus() {
 }
 
 // Redirect them to the /login page if not authorized
-export function RequireAuth({children}:{children:JSX.Element}){
+export function RequireAuth({ children }: { children: JSX.Element }) {
     const auth = useAuth();
-    if (auth?.user) {        
-        return <Navigate to="/login" /> ;
+    if (auth?.user) {
+        return <Navigate to="/login" />;
     }
 
 }

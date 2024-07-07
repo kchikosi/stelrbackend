@@ -3,55 +3,39 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import TopNav from '../top-nav/top-nav.tsx'
 import BottomNav from '../bottom-nav/bottom-nav.tsx'
-import { useNavigate } from "react-router-dom";
-import { AuthProvider } from "../auth.tsx";
-
-interface Auth {
-  isAuthenticated: boolean;
-}
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../auth.tsx";
 
 interface LoginUser {
   username: string;
   password: string;
+  isAuthenticated: boolean;
 }
 
 export default function Login() {
-  let [isAuthenticated, setAuth] = React.useState<Auth>();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const navigate = useNavigate();
 
   const [loginUser, setLoginUser] = React.useState<LoginUser>({
     username: "",
     password: "",
+    isAuthenticated: false,
   });
 
-  let login = () => {
-    fetch('http://localhost:8080/api/v1/auth/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(loginUser)
-    })
-      .then(response => (auth: Auth) => {
-        const jwtToken = response.headers.get('Authorization');
-        console.log("JWT token => " + jwtToken);
-        if (jwtToken != null) {
-          sessionStorage.setItem("jwt", jwtToken);
-          auth.isAuthenticated = true;
-          setAuth(auth);
-        }
-      })
-      .catch(err => console.log(err))
-  };
+  const auth = useAuth();
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setLoginUser({ ...loginUser, [event.target.id]: event.target.value });
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    console.log("login()  >> handlesubmit");
     event.preventDefault();
-    console.log("username > " + loginUser.username);
-    console.log("password > " + loginUser.password);
-    login();
+    auth.signin(loginUser, () => {
+      navigate(from, {replace: true});
+    });
   }
 
   return (
