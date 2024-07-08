@@ -30,7 +30,7 @@ public class AuthenticationService {
             e.printStackTrace();
         }
         String jwt = jwtService.generateToken(userDetails);
-        return JwtAuthenticationResponse.builder().token(jwt).build();
+        return JwtAuthenticationResponse.builder().token(jwt).user(userDetails).build();
     }
 
 }

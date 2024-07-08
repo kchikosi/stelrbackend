@@ -1,10 +1,13 @@
 package com.stelr.stelrbackend.web;
 
+import com.stelr.stelrbackend.domain.LoginUser;
 import com.stelr.stelrbackend.domain.request.SignIn;
 import com.stelr.stelrbackend.domain.response.JwtAuthenticationResponse;
 import com.stelr.stelrbackend.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,9 +25,6 @@ public class LoginController {
     @PostMapping(value = "signin")
     public ResponseEntity<JwtAuthenticationResponse> signin(@RequestBody SignIn request) throws Exception {
         JwtAuthenticationResponse response = authenticationService.signin(request);
-        return ResponseEntity.ok()
-                .header(HttpHeaders.AUTHORIZATION, BEARER_PREFIX + response.token)
-                .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization")
-                .build();
+        return new ResponseEntity<>(response, null, HttpStatus.OK);
     }
 }

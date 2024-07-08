@@ -28,7 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
 
     let signin = (user: LoginUser, callback: VoidFunction) => {
-         console.log("auth()   >> fetch");
+        console.log("auth()   >> fetch");
         // console.log("user     >> " + user.username);
         // console.log("password >> " + user.password);
         // console.log("is auth? >> " + user.isAuthenticated);
@@ -36,11 +36,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(user)                
+                body: JSON.stringify(user)
             }
         ).then(response => {
-            console.log(response.status);
-        }).catch( err => console.log(err));
+            console.log("status >> " + response.status);
+            return response.json();
+        }).then(data => {
+            console.log("token  >> " + data.token);
+            console.log("enc. passwd  >> " + data.user.password);
+            return data;
+        }
+
+        ).catch(err => console.log(err));
     };
 
     let signout = (callback: VoidFunction) => {
