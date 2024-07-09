@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import TopNav from '../top-nav/top-nav.tsx'
 import BottomNav from '../bottom-nav/bottom-nav.tsx'
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useAuth } from "../auth.tsx";
 
 interface LoginUser {
@@ -13,8 +13,6 @@ interface LoginUser {
 }
 
 export default function Login() {
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   const navigate = useNavigate();
 
@@ -33,8 +31,8 @@ export default function Login() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     console.log("login()  >> handlesubmit");
     event.preventDefault();
-    auth.signin(loginUser, () => {
-      navigate(from, {replace: true});
+    auth.signin(loginUser, () => { 
+      console.log("after submit "+ auth.user.password);
     });
   }
 

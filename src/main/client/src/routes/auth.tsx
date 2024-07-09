@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
     user: any;
-    signin: (user: LoginUser, callback: VoidFunction) => void;
+    signin: (user: LoginUser, callback: FunctionStringCallback) => void;
     signout: (callback: VoidFunction) => void;
 }
 
@@ -21,33 +21,35 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    let [user, setUser] = React.useState<LogiUser>({
+    let [user, setUser] = React.useState<LoginUser>({
         username: '',
         password: '',
         isAuthenticated: false,
     });
 
-    let signin = (user: LoginUser, callback: VoidFunction) => {
-        console.log("auth()   >> fetch");
-        // console.log("user     >> " + user.username);
-        // console.log("password >> " + user.password);
-        // console.log("is auth? >> " + user.isAuthenticated);
-        fetch('http://localhost:8080/api/v1/auth/signin',
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(user)
-            }
-        ).then(response => {
-            console.log("status >> " + response.status);
-            return response.json();
-        }).then(data => {
-            console.log("token  >> " + data.token);
-            console.log("enc. passwd  >> " + data.user.password);
-            return data;
-        }
+    const [data, setData] = React.useState<any>();
 
-        ).catch(err => console.log(err));
+    let signin = (user: LoginUser, callback: VoidFunction) => {
+        return (
+            fetch('http://localhost:8080/api/v1/auth/signin',
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(user)
+                }
+            ).then(response => {
+                console.log(response.status);
+                return response.json();
+            }).then(data => {
+                console.log(data.token);
+                setUser(data.user);
+                callback();
+            }
+
+            ).catch(
+                err => console.log(err)
+            )
+        );
     };
 
     let signout = (callback: VoidFunction) => {
