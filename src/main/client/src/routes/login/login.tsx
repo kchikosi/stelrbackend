@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import TopNav from '../top-nav/top-nav.tsx'
 import BottomNav from '../bottom-nav/bottom-nav.tsx'
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth.tsx";
 
 interface LoginUser {
@@ -31,8 +31,8 @@ export default function Login() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     console.log("login()  >> handlesubmit");
     event.preventDefault();
-    auth.signin(loginUser, () => { 
-      console.log("after submit "+ auth.user.password);
+    auth.signin(loginUser, () => {
+      navigate("/");
     });
   }
 
