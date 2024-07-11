@@ -17,7 +17,19 @@ interface LoginUser {
     username: string;
     password: string;
     isAuthenticated: boolean;
-  }
+}
+
+interface SignUpInfo {
+    firstname: string;
+    lastname: string;
+    username: string;
+    password: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+    phone: string;
+}
 
 
 
@@ -29,11 +41,6 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    // const [] = React.useState<LoginUser>({
-    //     username: "",
-    //     password: "",
-    //     isAuthenticated: false,
-    //   });
 
     const [authInfo, setAuthInfo] = React.useState<AuthInfo>({
         token: "",
@@ -60,13 +67,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         );
     };
 
+    const signup = (newuser: SignUpInfo, callback : VoidFunction) => {
+        return (
+            fetch('http://localhost:8080/api/v1/auth/signup',
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newuser)                    
+                }
+            ).then( response => {
+                return response.json();
+            }).then( data => {
+                setAuthInfo(data);
+                callback();
+            }).catch(
+                err => console.log(err)
+            )
+        );
+    };
+
     const signout = (callback: VoidFunction) => {
         return (() => {
             setAuthInfo(null!);
             callback();
         });
     }
-    const value = { authInfo, signin, signout };
+    const value = { authInfo, signin, signout, signup };
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
@@ -89,10 +115,10 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
     const isAuth = (auth.authInfo.token.length > 0);
     const location = useLocation();
 
-    console.log("auth.requireauth isAuth => "+isAuth); 
+    console.log("auth.requireauth isAuth => " + isAuth);
 
     if (!isAuth) {
-        return <Navigate to="/login" state={{from : location}} replace />;
+        return <Navigate to="/login" state={{ from: location }} replace />;
     }
     return children;
 }

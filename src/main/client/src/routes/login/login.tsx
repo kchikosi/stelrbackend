@@ -35,11 +35,10 @@ export default function Login() {
       navigate("/");
     });
   }
-
   return (
     <>
       <TopNav />
-      <Form id="login-from" onSubmit={handleSubmit}>
+      <Form id="login-form" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="username" onChange={handleChange}>
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />
