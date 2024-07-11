@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 interface AuthInfo {
     token: string;
@@ -24,6 +23,7 @@ interface LoginUser {
 
 const AuthContext = React.createContext<AuthContextType>(null!);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
     return React.useContext(AuthContext);
 }
@@ -72,7 +72,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 export function AuthStatus() {
     const auth = React.useContext(AuthContext);
-    const navigate = useNavigate();
 
     if (!auth?.authInfo.token) {
         return <p>You are not logged in</p>;
@@ -80,11 +79,6 @@ export function AuthStatus() {
     return (
         <div>
             <p> Welcome {auth?.authInfo.username}</p>
-            <Button
-                onClick={() => auth.signout(() => {
-                    navigate("/");
-                })}
-            >Sign Out</Button>
         </div>);
 
 }
@@ -92,8 +86,13 @@ export function AuthStatus() {
 // Redirect them to the /login page if not authorized
 export function RequireAuth({ children }: { children: JSX.Element }) {
     const auth = useAuth();
-    if (!auth?.authInfo.token) {
-        return <Navigate to="/login" />;
-    }
+    const isAuth = (auth.authInfo.token.length > 0);
+    const location = useLocation();
 
+    console.log("auth.requireauth isAuth => "+isAuth); 
+
+    if (!isAuth) {
+        return <Navigate to="/login" state={{from : location}} replace />;
+    }
+    return children;
 }

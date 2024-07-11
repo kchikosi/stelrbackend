@@ -24,7 +24,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './routes/home-page.tsx'
 import { AuthProvider, RequireAuth } from './routes/auth.tsx'
 
-const root = createRoot(document.getElementById('root')!);
+const root = createRoot(document.getElementById('index')!);
 
 root.render(
   <BrowserRouter>
