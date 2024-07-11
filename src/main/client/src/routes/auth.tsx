@@ -11,6 +11,7 @@ interface AuthContextType {
     authInfo: AuthInfo;
     signin: (user: LoginUser, callback: VoidFunction) => void;
     signout: (callback: VoidFunction) => void;
+    signup: (newuser:SignUpInfo, callback: VoidFunction) => void;
 }
 
 interface LoginUser {

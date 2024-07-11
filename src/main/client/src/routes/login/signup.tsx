@@ -5,8 +5,9 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import TopNav from '../top-nav/top-nav.tsx'
-import BottomNav  from '../bottom-nav/bottom-nav.tsx'
+import BottomNav from '../bottom-nav/bottom-nav.tsx'
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth.tsx';
 
 interface SignUpInfo {
   firstname: string;
@@ -33,14 +34,16 @@ export default function Signup() {
     city: "",
     state: "",
     zip: "",
-    phone: "",    
+    phone: "",
   });
 
+  const auth = useAuth();
+
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setNewUser({...newUser, [event.target.id]: event.target.value});
+    setNewUser({ ...newUser, [event.target.id]: event.target.value });
   }
 
-  const handleSubmit = (event : React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("signup() => submitting..");
     const form = event.currentTarget;
@@ -49,95 +52,98 @@ export default function Signup() {
       event.preventDefault();
       event.stopPropagation();
     }
-    console.log("is form valid => "+ form.checkValidity());
+    console.log("is form valid => " + form.checkValidity());
     setValidated(true);
     //call signup code
+    auth.signup(newUser, () => {
+      navigate("/");
+    });
   };
 
-return(
-<>
-    <TopNav/>
-    <Form id="signup-form" noValidate validated={validated} onSubmit={handleSubmit}>
-      <Row className="mb-3">
-        <Form.Group as={Col} md="4" controlId="firstname" onChange={handleChange}>
-          <Form.Label>First name</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder="First name"
-            defaultValue="Mark"
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col} md="4" controlId="lastname" onChange={handleChange}>
-          <Form.Label>Last name</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder="Last name"
-            defaultValue="Otto"
-          />
-          <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col} md="4" controlId="username" onChange={handleChange}>
-          <Form.Label>Username</Form.Label>
-          <InputGroup hasValidation>
-            <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+  return (
+    <>
+      <TopNav />
+      <Form id="signup-form" noValidate validated={validated} onSubmit={handleSubmit}>
+        <Row className="mb-3">
+          <Form.Group as={Col} md="4" controlId="firstname" onChange={handleChange}>
+            <Form.Label>First name</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Username"
-              aria-describedby="inputGroupPrepend"
               required
+              type="text"
+              placeholder="First name"
+              defaultValue="Mark"
             />
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="4" controlId="lastname" onChange={handleChange}>
+            <Form.Label>Last name</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Last name"
+              defaultValue="Otto"
+            />
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="4" controlId="username" onChange={handleChange}>
+            <Form.Label>Username</Form.Label>
+            <InputGroup hasValidation>
+              <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+              <Form.Control
+                type="text"
+                placeholder="Username"
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Please choose a username.
+              </Form.Control.Feedback>
+            </InputGroup>
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col} md="3" controlId="street" onChange={handleChange}>
+            <Form.Label>Street</Form.Label>
+            <Form.Control type="text" placeholder="1234 Main St." required />
             <Form.Control.Feedback type="invalid">
-              Please choose a username.
+              Please provide a valid street address.
             </Form.Control.Feedback>
-          </InputGroup>
+          </Form.Group>
+          <Form.Group as={Col} md="3" controlId="city" onChange={handleChange}>
+            <Form.Label>City</Form.Label>
+            <Form.Control type="text" placeholder="City" required />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid city.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="3" controlId="state" onChange={handleChange}>
+            <Form.Label>State</Form.Label>
+            <Form.Control type="text" placeholder="State" required />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid state.
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="3" controlId="zip" onChange={handleChange}>
+            <Form.Label>Zip</Form.Label>
+            <Form.Control type="text" placeholder="Zip" required />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid zip.
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Row>
+        <Form.Group className="mb-3">
+          <Form.Check
+            required
+            label="Agree to terms and conditions"
+            feedback="You must agree before submitting."
+            feedbackType="invalid"
+          />
         </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Form.Group as={Col} md="3" controlId="street" onChange={handleChange}>
-          <Form.Label>Street</Form.Label>
-          <Form.Control type="text" placeholder="1234 Main St." required />
-          <Form.Control.Feedback type="invalid">
-            Please provide a valid street address.
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col} md="3" controlId="city" onChange={handleChange}>
-          <Form.Label>City</Form.Label>
-          <Form.Control type="text" placeholder="City" required />
-          <Form.Control.Feedback type="invalid">
-            Please provide a valid city.
-          </Form.Control.Feedback>
-        </Form.Group>        
-        <Form.Group as={Col} md="3" controlId="state" onChange={handleChange}>
-          <Form.Label>State</Form.Label>
-          <Form.Control type="text" placeholder="State" required />
-          <Form.Control.Feedback type="invalid">
-            Please provide a valid state.
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col} md="3" controlId="zip" onChange={handleChange}>
-          <Form.Label>Zip</Form.Label>
-          <Form.Control type="text" placeholder="Zip" required />
-          <Form.Control.Feedback type="invalid">
-            Please provide a valid zip.
-          </Form.Control.Feedback>
-        </Form.Group>
-      </Row>
-      <Form.Group className="mb-3">
-        <Form.Check
-          required
-          label="Agree to terms and conditions"
-          feedback="You must agree before submitting."
-          feedbackType="invalid"
-        />
-      </Form.Group>
-      <Button type="submit">Submit form</Button>
-      <Button type="button" onClick={() => {navigate(-1)}}>Cancel</Button>
-    </Form>
+        <Button type="submit">Submit form</Button>
+        <Button type="button" onClick={() => { navigate(-1) }}>Cancel</Button>
+      </Form>
 
-    <BottomNav/>
+      <BottomNav />
     </>
-);
+  );
 }
