@@ -2,6 +2,7 @@ package com.stelr.stelrbackend.web;
 
 import com.stelr.stelrbackend.domain.LoginUser;
 import com.stelr.stelrbackend.domain.request.SignIn;
+import com.stelr.stelrbackend.domain.request.SignUp;
 import com.stelr.stelrbackend.domain.response.JwtAuthenticationResponse;
 import com.stelr.stelrbackend.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,11 @@ public class LoginController {
     public ResponseEntity<JwtAuthenticationResponse> signin(@RequestBody SignIn request) throws Exception {
         JwtAuthenticationResponse response = authenticationService.signin(request);
         return new ResponseEntity<>(response, null, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "signup")
+    public ResponseEntity<JwtAuthenticationResponse> signup(@RequestBody SignUp request) throws Exception {
+        JwtAuthenticationResponse response = authenticationService.signup(request);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }

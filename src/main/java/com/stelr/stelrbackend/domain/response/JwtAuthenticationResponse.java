@@ -17,5 +17,6 @@ public class JwtAuthenticationResponse {
     public String token;
     public String username;
     public String password;
+    public String firstname,lastname, address, city, state, zip, phone, message;
 
 }

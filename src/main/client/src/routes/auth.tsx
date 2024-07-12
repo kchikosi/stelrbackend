@@ -79,6 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             ).then( response => {
                 return response.json();
             }).then( data => {
+                console.log("result =>> "+data.token);
                 setAuthInfo(data);
                 callback();
             }).catch(
