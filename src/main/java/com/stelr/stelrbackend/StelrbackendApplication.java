@@ -41,12 +41,12 @@ public class StelrbackendApplication implements CommandLineRunner {
         account.setAccountType(accountType);
         accountRepository.save(account);
 
-        Person person = new Person("Kotsanai", "Chikosi", "R", "thegoat@gmail.com", "603 256 9898", "passwd", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+        Person person = new Person("Kotsanai", "Chikosi", "R", "thegoat@gmail.com", "603 256 9898",  Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
 
         person.setAccount(account);
         personRepository.save(person);
 
-        LoginUser loginUser = new LoginUser("thegoat@gmail.com", "password", List.of("USER"), "thegoat@gmail.com", Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+        LoginUser loginUser = new LoginUser("thegoat@gmail.com","password","thegoat@gmail.com","123 Elm St.","Manchester","NH","03109",Timestamp.valueOf(LocalDateTime.now()),Timestamp.valueOf(LocalDateTime.now()),List.of("USER"));
         userDetailsService.encryptAndSavePassword(loginUser);
     }
 }

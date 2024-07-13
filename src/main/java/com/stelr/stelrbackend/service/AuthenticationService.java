@@ -59,9 +59,9 @@ public class AuthenticationService {
             return JwtAuthenticationResponse.builder()
                     .message("user exists").build();
         };
-        Person person = new Person(request.firstname,request.lastname, null,request.username, request.phone, request.password, Timestamp.valueOf(LocalDateTime.now()),Timestamp.valueOf(LocalDateTime.now()));
+        Person person = new Person(request.firstname,request.lastname, null,request.username, request.phone, Timestamp.valueOf(LocalDateTime.now()),Timestamp.valueOf(LocalDateTime.now()));
         personRepository.save(person);
-        LoginUser loginUser = new LoginUser(request.username, request.password, List.of("USER"), request.username, Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()));
+        LoginUser loginUser = new LoginUser(request.username, request.password, request.username, request.address, request.city, request.state, request.zip, Timestamp.valueOf(LocalDateTime.now()), Timestamp.valueOf(LocalDateTime.now()), List.of("USER"));
         userDetailsService.encryptAndSavePassword(loginUser);
         String jwt = jwtService.generateToken(loginUser);
         return JwtAuthenticationResponse.builder()

@@ -12,6 +12,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SignUp {
-    public String firstname,lastname, username, password, address, city, state, zip, phone;
+    public String firstname,lastname, username, password, address, city, state, zip, phone, email;
     public Timestamp dateModified, dateCreated;
 }

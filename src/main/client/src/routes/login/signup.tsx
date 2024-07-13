@@ -65,27 +65,27 @@ export default function Signup() {
       <TopNav />
       <Form id="signup-form" noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="firstname" onChange={handleChange}>
+          <Form.Group as={Col} md="3" controlId="firstname" onChange={handleChange}>
             <Form.Label>First name</Form.Label>
             <Form.Control
               required
               type="text"
               placeholder="First name"
-              defaultValue="Mark"
+              defaultValue="Your first name"
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="lastname" onChange={handleChange}>
+          <Form.Group as={Col} md="3" controlId="lastname" onChange={handleChange}>
             <Form.Label>Last name</Form.Label>
             <Form.Control
               required
               type="text"
               placeholder="Last name"
-              defaultValue="Otto"
+              defaultValue="Your last name"
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="username" onChange={handleChange}>
+          <Form.Group as={Col} md="3" controlId="username" onChange={handleChange}>
             <Form.Label>Username</Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
@@ -100,11 +100,15 @@ export default function Signup() {
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
+          <Form.Group as={Col} md="3" controlId="password" onChange={handleChange}>
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" autoComplete="on" />
+          </Form.Group>
         </Row>
         <Row className="mb-3">
-          <Form.Group as={Col} md="3" controlId="street" onChange={handleChange}>
+          <Form.Group as={Col} md="3" controlId="address" onChange={handleChange}>
             <Form.Label>Street</Form.Label>
-            <Form.Control type="text" placeholder="1234 Main St." required />
+            <Form.Control type="text" placeholder="Street" required />
             <Form.Control.Feedback type="invalid">
               Please provide a valid street address.
             </Form.Control.Feedback>
@@ -129,6 +133,13 @@ export default function Signup() {
             <Form.Control.Feedback type="invalid">
               Please provide a valid zip.
             </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="3" controlId="phone" onChange={handleChange}>
+          <Form.Label>Phone</Form.Label>
+          <Form.Control type="phone" placeholder="Phone" required />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid phone number
+          </Form.Control.Feedback>
           </Form.Group>
         </Row>
         <Form.Group className="mb-3">

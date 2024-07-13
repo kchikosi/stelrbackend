@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @Builder
 @Entity
 @AllArgsConstructor
+
 public class LoginUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,7 +41,7 @@ public class LoginUser implements UserDetails {
     @Column
     public String zip;
     @Column
-    public Timestamp dateCreate, dateModified;
+    public Timestamp dateCreated, dateModified;
 
     @ElementCollection(fetch = FetchType.EAGER)
     public List<String> roles;
@@ -48,26 +50,17 @@ public class LoginUser implements UserDetails {
     }
 
 
-    public LoginUser(String username, String password, List<String> roles, String email, Timestamp dateCreate, Timestamp dateModified) {
+    public LoginUser(String username, String password, String email, String address, String city, String state, String zip, Timestamp dateCreated, Timestamp dateModified, List<String> roles) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
-        this.email = email;
-        this.dateCreate = dateCreate;
-        this.dateModified = dateModified;
-    }
-
-    public LoginUser(String username, String password, List<String> roles, String email, String address, String city, String state, String zip, Timestamp dateCreate, Timestamp dateModified) {
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
         this.email = email;
         this.address = address;
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.dateCreate = dateCreate;
+        this.dateCreated = dateCreated;
         this.dateModified = dateModified;
+        this.roles = roles;
     }
 
     @Override

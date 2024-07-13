@@ -46,7 +46,7 @@ public class PersonController {
     public ResponseEntity update(@PathVariable("id") long id, @RequestBody Person person) {
         Optional<Person> personFromDb = Optional.ofNullable(repository.findById(id).orElseThrow(() -> new PersonNotFoundException(id)));
         Timestamp dateModified = Timestamp.valueOf(LocalDateTime.now());
-        repository.updateByPersonId(personFromDb.get().account, dateModified, person.email, person.firstName, person.initial, person.lastName, person.password, person.phone, personFromDb.get().personId);
+        repository.updateByPersonId(personFromDb.get().account, dateModified, person.email, person.firstName, person.initial, person.lastName, person.phone, personFromDb.get().personId);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Entity
 public class Person {
-    public String firstName, lastName, initial, email, phone, password;
+    public String firstName, lastName, initial, email, phone;
     public Timestamp dateCreated, dateModified;
     @OneToOne
     @JoinColumn(name = "accountId")
@@ -23,13 +23,12 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long personId;
 
-    public Person(String firstName, String lastName, String initial, String email, String phone, String password, Timestamp dateCreated, Timestamp dateModified) {
+    public Person(String firstName, String lastName, String initial, String email, String phone, Timestamp dateCreated, Timestamp dateModified) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.initial = initial;
         this.email = email;
         this.phone = phone;
-        this.password = password;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
     }
