@@ -3,12 +3,25 @@ import BottomNav from './bottom-nav/bottom-nav.tsx'
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Nav } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { FormEvent, MouseEvent, useState } from 'react';
+
+
 export default function Search() {
+
+    let [param, setParam] =useState<string>();
+
     function handleClick(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
-        throw new Error('Function not implemented.');
+        event.preventDefault();
+        alert("You clicked " + event.type );
+        //throw new Error('Function not implemented.');
+    }
+
+    function handleChange(event: FormEvent<HTMLElement>): void {
+        alert("You entered "+event.target.value);
+        //throw new Error('Function not implemented.');
     }
 
     return (
@@ -17,21 +30,23 @@ export default function Search() {
             <Container style={{ margin: 0, height: 800 }}>
                 <Row>
                     <Col xs={3} style={{ backgroundColor: "#f7f7f7", height: 800 }}>
-                        <Form id='search-form'>
-                            <Row>
-                                <InputGroup className='mb-3' id='query'>
-                                    <Form.Group>
-                                        <Form.Control type='search' placeholder='Search' />
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Button variant='secondary' type='submit' onClick={handleClick}>New</Button>
-                                    </Form.Group>
-                                </InputGroup>
-                            </Row>
-                            <Row></Row>
-                        </Form>
+                        <Row>
+                            <InputGroup className='mb-3' id='query'>
+                                <Form.Group id='search' onChange={handleChange}>
+                                    <Form.Control type='search' placeholder='Search' />
+                                </Form.Group>
+                                <Form.Group id='new'>
+                                    <Button name="newcontact" variant='secondary' type='submit' onClick={handleClick}>New</Button>
+                                </Form.Group>
+                            </InputGroup>
+                        </Row>
+                        <Row>
+                            <Nav>
+                                <Nav.Link>Search results</Nav.Link>
+                            </Nav>
+                        </Row>
                     </Col>
-                    <Col xs={12}><Outlet /></Col>
+                    <Col xs={6}><Outlet/></Col>
                 </Row>
             </Container>
             <BottomNav />
