@@ -144,7 +144,6 @@ export default function Signup() {
         </Row>
         <Form.Group className="mb-3">
           <Form.Check
-            required
             label="Agree to terms and conditions"
             feedback="You must agree before submitting."
             feedbackType="invalid"

@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { AuthProvider, useAuth } from '../auth';
 import { useState } from 'react';
+import { Stack } from 'react-bootstrap';
 
 export default function TopNav() {
   const auth = useAuth();
@@ -36,13 +37,16 @@ export default function TopNav() {
                   <NavDropdown.Item href="/about">About Us</NavDropdown.Item>
                   <NavDropdown.Item href="/contact">Contact Us</NavDropdown.Item>
                   <NavDropdown.Item href="/faq">FAQ</NavDropdown.Item>
+                  <NavDropdown.Item href="/search">Search</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
             <ButtonGroup aria-label="Basic example">
-              <Button variant="secondary" href="/signup" hidden={isLoggedIn}>Sign up</Button>{' '}
-              <Button href="/login" hidden={isLoggedIn}>Login</Button>{' '}
-              <Button variant="primary" href="/logout" hidden={!isLoggedIn}>Log Out</Button>{' '}
+              <Stack direction="horizontal" gap={1} >
+                <Button variant="secondary" href="/signup" hidden={isLoggedIn}>Sign up</Button>{' '}
+                <Button href="/login" hidden={isLoggedIn}>Login</Button>{' '}
+                <Button variant="primary" href="/logout" hidden={!isLoggedIn}>Log Out</Button>{' '}
+              </Stack>
             </ButtonGroup>
           </Container>
         </Navbar>

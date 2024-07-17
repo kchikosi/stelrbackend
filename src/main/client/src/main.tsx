@@ -14,6 +14,8 @@ import Logout from './routes/login/logout.tsx'
 import Signup from './routes/login/signup.tsx'
 import Contact from './routes/contact-us.tsx'
 import FAQ from './routes/faq.tsx'
+import Search from './routes/search.tsx'
+import NewContact from './routes/new-contact.tsx'
 import './index.css'
 import {
   Route,
@@ -46,6 +48,9 @@ root.render(
         <Route path='signup' element={<Signup />} />
         <Route path='contact' element={<Contact />} />
         <Route path='faq' element={<FAQ />} />
+        <Route path='search' element={<Search />}>
+          <Route path='newcontact' element={<NewContact />} />
+        </Route>
       </Routes>
     </AuthProvider>
   </BrowserRouter>
