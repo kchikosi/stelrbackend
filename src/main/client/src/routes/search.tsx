@@ -4,23 +4,24 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { Button, Container, Nav } from 'react-bootstrap';
-import { Outlet } from 'react-router-dom';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { FormEvent, MouseEvent, useState } from 'react';
+import { FormEvent, MouseEvent } from 'react';
+import { Outlet } from 'react-router-dom';
 
 
 export default function Search() {
 
-    let [param, setParam] = useState<string>();
-
-    function handleClick(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
-        event.preventDefault();
-        alert("You clicked " + event.type);
-        //throw new Error('Function not implemented.');
-    }
 
     function handleChange(event: FormEvent<HTMLElement>): void {
         alert("You entered " + event.target.value);
+        //throw new Error('Function not implemented.');
+    }
+
+
+    function handleClick(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+        event.preventDefault();
+        event.stopPropagation();
+        alert("You clicked " + event.currentTarget.name);
         //throw new Error('Function not implemented.');
     }
 
@@ -52,12 +53,13 @@ export default function Search() {
                             </nav>
                         </Row>
                     </Col>
-                    <Col xs={3}>
-                    <div id='detail'><Outlet /></div>
+                    <Col xs={9}>
+                        <Row as={Col} >
+                            <Outlet />
+                        </Row>
                     </Col>
                 </Row>
             </Container>
-
             <BottomNav />
         </>
 

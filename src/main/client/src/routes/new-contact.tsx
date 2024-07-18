@@ -16,7 +16,7 @@ interface NewContact {
 }
 
 export default function NewContact() {
-    const [contact,setContact] = React.useState<NewContact>({
+    const [contact, setContact] = React.useState<NewContact>({
         firstname: "",
         lastname: "",
         initial: "",

@@ -71,7 +71,6 @@ export default function Signup() {
               required
               type="text"
               placeholder="First name"
-              defaultValue="Your first name"
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
@@ -81,7 +80,6 @@ export default function Signup() {
               required
               type="text"
               placeholder="Last name"
-              defaultValue="Your last name"
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
