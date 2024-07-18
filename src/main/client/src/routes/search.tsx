@@ -11,16 +11,16 @@ import { FormEvent, MouseEvent, useState } from 'react';
 
 export default function Search() {
 
-    let [param, setParam] =useState<string>();
+    let [param, setParam] = useState<string>();
 
     function handleClick(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
         event.preventDefault();
-        alert("You clicked " + event.type );
+        alert("You clicked " + event.type);
         //throw new Error('Function not implemented.');
     }
 
     function handleChange(event: FormEvent<HTMLElement>): void {
-        alert("You entered "+event.target.value);
+        alert("You entered " + event.target.value);
         //throw new Error('Function not implemented.');
     }
 
@@ -41,15 +41,25 @@ export default function Search() {
                             </InputGroup>
                         </Row>
                         <Row>
-                            <Nav>
-                                <Nav.Link>Search results</Nav.Link>
-                            </Nav>
+                            <nav>
+                                <ul style={{ listStyle: 'none' }}>
+                                    <li>
+                                        <Nav>
+                                            <Nav.Link href={`/contacts/1`}>Your name</Nav.Link>
+                                        </Nav>
+                                    </li>
+                                </ul>
+                            </nav>
                         </Row>
                     </Col>
-                    <Col xs={6}><Outlet/></Col>
+                    <Col xs={3}>
+                    <div id='detail'><Outlet /></div>
+                    </Col>
                 </Row>
             </Container>
+
             <BottomNav />
         </>
+
     )
 }

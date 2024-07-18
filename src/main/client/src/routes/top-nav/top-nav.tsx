@@ -38,10 +38,11 @@ export default function TopNav() {
                   <NavDropdown.Item href="/contact">Contact Us</NavDropdown.Item>
                   <NavDropdown.Item href="/faq">FAQ</NavDropdown.Item>
                   <NavDropdown.Item href="/search">Search</NavDropdown.Item>
+                  <NavDropdown.Item href="/newcontact">New Contact</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
-            <ButtonGroup aria-label="Basic example">
+            <ButtonGroup aria-label="Login buttons">
               <Stack direction="horizontal" gap={1} >
                 <Button variant="secondary" href="/signup" hidden={isLoggedIn}>Sign up</Button>{' '}
                 <Button href="/login" hidden={isLoggedIn}>Login</Button>{' '}

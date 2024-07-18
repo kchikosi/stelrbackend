@@ -25,6 +25,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './routes/home-page.tsx'
 import { AuthProvider, RequireAuth } from './routes/auth.tsx'
+import ErrorPage from './routes/error-page.tsx'
 
 const root = createRoot(document.getElementById('index')!);
 
@@ -32,7 +33,7 @@ root.render(
   <BrowserRouter>
     <AuthProvider>
       <Routes>
-        <Route path='/' element={<Root />} />
+        <Route path='/' element={<Root />} errorElement={<ErrorPage/>} />
         <Route path='home' element={<Home />} />
         <Route path='personal' element={<RequireAuth><Personal /></RequireAuth>} />
         <Route path='business' element={<Business />} />
@@ -48,9 +49,10 @@ root.render(
         <Route path='signup' element={<Signup />} />
         <Route path='contact' element={<Contact />} />
         <Route path='faq' element={<FAQ />} />
-        <Route path='search' element={<Search />}>
-          <Route path='newcontact' element={<NewContact />} />
+        <Route path='search' element={<Search />} >
+          <Route path='newcontact/:contactId' element={<NewContact />} />
         </Route>
+        <Route path='newcontact' element={<NewContact />} />
       </Routes>
     </AuthProvider>
   </BrowserRouter>
