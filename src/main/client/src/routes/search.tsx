@@ -6,15 +6,19 @@ import Row from 'react-bootstrap/Row';
 import { Button, Container, Nav } from 'react-bootstrap';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { FormEvent, MouseEvent } from 'react';
-import { Outlet } from 'react-router-dom';
+import NewContact from './new-contact.tsx';
+import { useSearchParams } from 'react-router-dom';
 
 
 export default function Search() {
 
+    let [searchParams, setSearchParams] = useSearchParams();
 
-    function handleChange(event: FormEvent<HTMLElement>): void {
+    function handleChange(event: FormEvent<HTMLFormElement>): void {
         alert("You entered " + event.target.value);
-        //throw new Error('Function not implemented.');
+        event.preventDefault();
+        let params = serializeFormQuery(event.currentTarget);
+
     }
 
 
@@ -55,7 +59,7 @@ export default function Search() {
                     </Col>
                     <Col xs={9}>
                         <Row as={Col} >
-                            <Outlet />
+                            <NewContact />
                         </Row>
                     </Col>
                 </Row>
@@ -65,3 +69,13 @@ export default function Search() {
 
     )
 }
+
+
+
+
+
+
+function serializeFormQuery(e: EventTarget & HTMLFormElement) {  
+    console.log(" test "+ [...e.elements]);
+}
+
